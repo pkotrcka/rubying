@@ -34,7 +34,7 @@ weatherurl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lo
 wtrjsondata = JSON.parse(Net::HTTP.get(URI(weatherurl)))
 
 temp = (wtrjsondata['main']['temp'] - 273.15).round(2).to_s
-feelslike = (wtrjsondata['main']['feels_like'] - 273.15).to_s
+feelslike = (wtrjsondata['main']['feels_like'] - 273.15).round(2).to_s
 name = wtrjsondata['name']
 oblacnost = wtrjsondata['clouds']['all']
 vychod_slnka = Time.at(wtrjsondata['sys']['sunrise'])
@@ -64,5 +64,5 @@ else
   obl_symbol = "☁"
 end
 
-puts "Teplota v meste " + name + " je " + temp + "°C a" + obl_slovo + " " + obl_symbol + "\n"
+puts "Teplota v meste " + name + " je " + temp + "°C, pocitovo je to " + feelslike + "°C a" + obl_slovo + " " + obl_symbol + "\n"
 puts "Slniečko vstane v " + vychod_slnka.hour.to_s + ":" + filler_vychod + vychod_slnka.min.to_s + " a zapadne v " + zapad_slnka.hour.to_s + ":" + filler_zapad + zapad_slnka.min.to_s + " vášho času.\n"
